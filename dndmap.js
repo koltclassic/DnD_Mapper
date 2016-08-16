@@ -2,7 +2,6 @@
       // See also: http://kempe.net/blog/2014/06/14/leaflet-pan-zoom-image.html
       // create the slippy map
       var map = L.map('image-map', {
-        drawControl: true,
         minZoom: 1,
         maxZoom: 4,
         center: [0,0],
@@ -38,6 +37,7 @@
           }
       });
 
+      map.addControl(drawControl);
 
       map.on('draw:created', function(e){
         var type = e.layerType,
@@ -46,11 +46,20 @@
             shape_for_db = JSON.stringify(shape);
 
         if (type === 'marker'){
-
+   
         }
-        myDataRef.push({layer: shape_for_db})
-        map.addLayer(layer);
+        //myDataRef.push({layer: shape_for_db})
+        drawnItems.addLayer(layer);
       });
+
+      // map.on('draw:edited', function(e){
+      //   console.log(e);
+      //   var layers = e.layers;
+
+      //   layers.eachLayer(function (layer){
+
+      //   });
+      // });
 
       //map.addControl(drawControl);
 
@@ -84,19 +93,6 @@
       var Waterdeep = L.marker([-84.6875, 81]).bindPopup('<a href="http://forgottenrealms.wikia.com/wiki/Waterdeep" class="speciallink">Waterdeep</a>').addTo(map);
       var Zelbross = L.marker([-78.625, 119]).bindPopup('<a href="http://forgottenrealms.wikia.com/wiki/Zelbross" class="speciallink">Zelbross</a>').addTo(map);
 
-      var grayscale = L.tileLayer(mapboxUrl, {id: 'MapID', attribution: mapboxAttribution})
-
-      var cities = L.layerGroup = ([BaldursGate, Candlekeep, Cragmaw_Hideout, Crimmor, Daggerford, Fort_Morninglord, Luskan, Mirabar, Neverwinter, Secomber, Sskhanaja, Silverymoon, WarlocksCrypt, Waterdeep, Zelbross]);
-
-      var baseMaps = {
-      	"grayscale": grayscale
-      }
-
-      var overlayMaps = {
-      	"Cities": cities
-      }
-
-      L.control.layers(baseMaps, overlayMaps).addTo(map);
 
       /*
       var location = [
