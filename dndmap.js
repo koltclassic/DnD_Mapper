@@ -46,11 +46,19 @@
             shape_for_db = JSON.stringify(shape);
 
         if (type === 'marker'){
-   
+          var title = prompt('enter title');
+          var content = prompt('enter content');
+          layer.bindPopup('<h1>' + title + '</h1><br><p>' + content + '</p>').openPopup();
         }
         //myDataRef.push({layer: shape_for_db})
         drawnItems.addLayer(layer);
       });
+
+
+      // drawnItems.on('click', function(event){
+      //     var clickedMarker = event.layer;
+      //     console.log(event.layer);  
+      // });
 
       // map.on('draw:edited', function(e){
       //   console.log(e);
